@@ -56,6 +56,17 @@
                     <label for="recordkeepingRateAfterExit">Recordkeeping Rate After Exit (%)</label>
                     <input type="number" id="recordkeepingRateAfterExit" placeholder="0.15" min="0" max="100" step="0.01" required>
                 </div>
+
+                <div class="input-group">
+                    <label for="lookbackPeriod">Look-back Period</label>
+                    <select id="lookbackPeriod" required>
+                        <option value="1">1-year</option>
+                        <option value="2">2-year</option>
+                        <option value="3" selected>3-year</option>
+                        <option value="4">4-year</option>
+                        <option value="5">5-year</option>
+                    </select>
+                </div>
             </div>
 
             <button id="calculateBtn" class="calculate-btn">Calculate & Generate Analysis</button>
@@ -70,7 +81,7 @@
 
             <div class="chart-container">
                 <h3>3-Year Treasury Rate History (DGS3)</h3>
-                <p class="chart-description">Historical 3-Year Treasury Constant Maturity Rate with your contract period highlighted</p>
+                <p class="chart-description">Historical 3-Year Treasury Constant Maturity Rate with your contract period highlighted. The look-back period shows historical data before the contract start date for context.</p>
                 <canvas id="lineChart"></canvas>
             </div>
 

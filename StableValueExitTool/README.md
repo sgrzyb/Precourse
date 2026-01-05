@@ -12,6 +12,7 @@ A web-based tool that helps users assess the optimal timing for exiting a stable
 - **Competitive Market Rate**: Alternative market interest rate available (%)
 - **Current Recordkeeping Rate**: Current recordkeeping fee rate (%)
 - **Recordkeeping Rate After Exit**: Projected recordkeeping rate post-exit (%)
+- **Look-back Period**: Dropdown selection (1-5 years) to determine how much historical treasury rate data to display before the contract start date for context
 
 ### Visual Outputs
 

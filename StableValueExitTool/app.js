@@ -200,7 +200,8 @@ function getInputValues() {
         currentCreditingRate: parseFloat(document.getElementById('currentCreditingRate').value),
         competitiveMarketRate: parseFloat(document.getElementById('competitiveMarketRate').value),
         currentRecordkeepingRate: parseFloat(document.getElementById('currentRecordkeepingRate').value),
-        recordkeepingRateAfterExit: parseFloat(document.getElementById('recordkeepingRateAfterExit').value)
+        recordkeepingRateAfterExit: parseFloat(document.getElementById('recordkeepingRateAfterExit').value),
+        lookbackPeriod: parseInt(document.getElementById('lookbackPeriod').value)
     };
 }
 
@@ -216,13 +217,13 @@ function createLineChart(inputs) {
     // Filter data for relevant time period (expand range for context)
     const startDate = new Date(inputs.contractStartDate);
     const endDate = new Date(inputs.terminationDate);
-    const bufferMonths = 12;
+    const lookbackMonths = inputs.lookbackPeriod * 12; // Convert years to months
 
     const displayStartDate = new Date(startDate);
-    displayStartDate.setMonth(displayStartDate.getMonth() - bufferMonths);
+    displayStartDate.setMonth(displayStartDate.getMonth() - lookbackMonths);
 
     const displayEndDate = new Date(endDate);
-    displayEndDate.setMonth(displayEndDate.getMonth() + bufferMonths);
+    displayEndDate.setMonth(displayEndDate.getMonth() + 12); // Show 1 year after termination for context
 
     const filteredData = fredData.filter(item => {
         const itemDate = new Date(item.date);
