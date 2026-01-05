@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Value Strategy Exit Assessment Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stable Value Strategy Exit Assessment Tool</h1>
+            <p>Analyze the optimal timing for exiting a stable value strategy using Federal Reserve data</p>
+        </header>
+
+        <div class="input-section">
+            <h2>Input Parameters</h2>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="contractStartDate">Contract Start Date</label>
+                    <select id="contractStartDate" required>
+                        <option value="">Select start date...</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="terminationDate">Projected Termination Date</label>
+                    <select id="terminationDate" required>
+                        <option value="">Select termination date...</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="contractAssets">Contract Assets ($)</label>
+                    <input type="number" id="contractAssets" placeholder="1000000" min="0" step="1000" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="currentCreditingRate">Current Crediting Rate (%)</label>
+                    <input type="number" id="currentCreditingRate" placeholder="2.5" min="0" max="100" step="0.01" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="competitiveMarketRate">Competitive Market Rate (%)</label>
+                    <input type="number" id="competitiveMarketRate" placeholder="3.5" min="0" max="100" step="0.01" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="currentRecordkeepingRate">Current Recordkeeping Rate (%)</label>
+                    <input type="number" id="currentRecordkeepingRate" placeholder="0.25" min="0" max="100" step="0.01" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="recordkeepingRateAfterExit">Recordkeeping Rate After Exit (%)</label>
+                    <input type="number" id="recordkeepingRateAfterExit" placeholder="0.15" min="0" max="100" step="0.01" required>
+                </div>
+            </div>
+
+            <button id="calculateBtn" class="calculate-btn">Calculate & Generate Analysis</button>
+            <div id="loadingMessage" class="loading-message" style="display: none;">
+                Loading FRED data...
+            </div>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+
+        <div class="output-section" id="outputSection" style="display: none;">
+            <h2>Analysis Results</h2>
+
+            <div class="chart-container">
+                <h3>3-Year Treasury Rate History (DGS3)</h3>
+                <p class="chart-description">Historical 3-Year Treasury Constant Maturity Rate with your contract period highlighted</p>
+                <canvas id="lineChart"></canvas>
+            </div>
+
+            <div class="charts-row">
+                <div class="chart-box">
+                    <h3>Investor Interest Earned</h3>
+                    <canvas id="interestChart"></canvas>
+                    <div class="difference-text">
+                        <strong>Difference: <span id="interestDifference"></span></strong>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <h3>Recordkeeping Fee Impact</h3>
+                    <canvas id="recordkeepingChart"></canvas>
+                    <div class="difference-text">
+                        <strong>Difference: <span id="recordkeepingDifference"></span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-section">
+                <h3>Summary Analysis</h3>
+                <div id="summaryText" class="summary-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Data Source: <a href="https://fred.stlouisfed.org/series/DGS3" target="_blank">FRED - 3-Year Treasury Constant Maturity Rate (DGS3)</a></p>
+        <p>This tool is for informational purposes only and does not constitute financial advice.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
